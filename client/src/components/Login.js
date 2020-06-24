@@ -10,11 +10,12 @@ const initialState = {
   message: "",
 };
 
-export default function Login({ setUser, history }) {
+export default function Login({ setUser, history, join }) {
   const { username, password, message, handleChange, handleLogin } = useAuth(
     initialState,
     setUser,
-    history
+    history,
+    join
   );
 
   return (

@@ -65,8 +65,9 @@ router.post("/login", (req, res) => {
 });
 
 router.delete("/logout", (req, res) => {
+  const username = req.user.username;
   req.logout();
-  res.json({ message: "Successful logout" });
+  res.json({ message: "Successful logout", username });
 });
 
 // returns the logged in user

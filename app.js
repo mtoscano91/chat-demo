@@ -27,6 +27,13 @@ const debug = require("debug")(
 
 const app = express();
 
+////Socket.IO
+var http = require("http").createServer(app);
+
+require("./routes/socket")(http);
+
+////Socket.IO
+
 const session = require("express-session");
 const passport = require("passport");
 
@@ -72,4 +79,31 @@ app.use("/api/auth", require("./routes/auth"));
 const index = require("./routes/index");
 app.use("/", index);
 
+const PORT = process.env.PORT || 5555;
+
 module.exports = app;
+
+///Imported from www. If it doesnt work put it back
+http.on("error", (error) => {
+  if (error.syscall !== "listen") {
+    throw error;
+  }
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case "EACCES":
+      console.error(`Port ${PORT} requires elevated privileges`);
+      process.exit(1);
+      break;
+    case "EADDRINUSE":
+      console.error(`Port ${PORT}is already in use`);
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+});
+
+http.listen(PORT, () => {
+  console.log(`Listening on http://localhost:${PORT}`);
+});

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { signup, login } from "../services/auth";
 
 //we receive the setUser and history from the componets so we dont have to have a middle function between the component and the hook itself.
-export default function useAuth(initialState, setUser, history) {
+export default function useAuth(initialState, setUser, history, join) {
   const [form, setForm] = useState(initialState);
   const { username, password, message } = form;
 
@@ -38,6 +38,7 @@ export default function useAuth(initialState, setUser, history) {
       });
     } else {
       setUser(data);
+      join(data.username);
       history.push("/");
     }
   }

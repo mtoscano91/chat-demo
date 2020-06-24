@@ -10,11 +10,12 @@ const initialState = {
   message: "",
 };
 
-export default function Signup(props) {
+export default function Signup({ setUser, history, join }) {
   const { username, password, message, handleSignup, handleChange } = useAuth(
     initialState,
-    props.setUser,
-    props.history
+    setUser,
+    history,
+    join
   );
 
   return (

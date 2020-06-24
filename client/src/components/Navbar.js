@@ -4,7 +4,8 @@ import { logout } from "../services/auth";
 import "./Navbar.css";
 
 const handleLogout = (props) => {
-  logout().then(() => {
+  logout().then((data) => {
+    props.left(data.username);
     props.setUser(null);
   });
 };
